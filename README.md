@@ -1,4 +1,4 @@
-# CC_Ceph_File_Manager
+# [For the Professor]
 
 We will first illustrate how to test the application in the cluster and then 
 explain how to install all the required modules and file needed to replicate 
