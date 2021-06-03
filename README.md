@@ -11,7 +11,7 @@ We already have a **Load Balancer** and a **MySQL** container up and running.
 To test the application we just need to run the instances of the backend 
 deployed on each **Ceph-mon Module** and then run the **Client** script.
 
-##Ceph-mon
+**Ceph-mon**
 * On VM `172.16.3.219`
   ```sh
   lxc exec juju-a6d2c6-1-lxd-0 /bin/bash
@@ -27,7 +27,7 @@ deployed on each **Ceph-mon Module** and then run the **Client** script.
   lxc exec juju-a6d2c6-3-lxd-1 /bin/bash
   python3 api.py
   ```
-##Client
+**Client**
 * On VM `172.16.3.168`
   ```sh
   python3 ceph-client/client.py
@@ -37,7 +37,7 @@ deployed on each **Ceph-mon Module** and then run the **Client** script.
 
 The installation is composed of various modules.
 
-##MySQL Database
+**MySQL Database**
 We deployed this module on the VM `172.16.3.231`. 
 Such IP is hardcoded into the scripts that interact with this module 
 (e.g. the **Load Balancer module**).
@@ -65,7 +65,7 @@ Such IP is hardcoded into the scripts that interact with this module
    INSERT INTO `ipaddresses`.`addresses` VALUES ("252.3.199.60", "172.16.3.199");
    ```
    
-##Load Balancer
+**Load Balancer**
 We deployed this module on the VM `172.16.3.231`. 
 Such IP is hardcoded into the scripts that interact with this module 
 (e.g. the **Client module**).
@@ -108,6 +108,6 @@ Other instances of this module may be easily deployed.
    docker build -t load-balancer .
    docker run -p 8080:8080 -d load-balancer
    ```
-##Ceph-mon & Client 
+**Ceph-mon & Client**
 * Put `BE_api.py` and `BE_server.py` in the three ceph-mon modules
 * Put `FE_client.py` in the machine where you want to run the client
