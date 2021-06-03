@@ -39,8 +39,9 @@ The installation is composed of various modules.
 
 **MySQL Database**
 We deployed this module on the VM `172.16.3.231`. 
-Such IP is hardcoded into the scripts that interact with this module 
-(e.g. the **Load Balancer module**).
+Such IP is hardcoded into **LB_api.py**. 
+Edit it with the IP of the machine where you 
+deploy the MySQL module.
 1. Deploy a container with MySQL exposing port `3306`
    ```sh
    docker pull mysql/mysql-server
@@ -67,8 +68,9 @@ Such IP is hardcoded into the scripts that interact with this module
    
 **Load Balancer**
 We deployed this module on the VM `172.16.3.231`. 
-Such IP is hardcoded into the scripts that interact with this module 
-(e.g. the **Client module**).
+Such IP is hardcoded into **FE_client.py**. 
+Edit it with the IP of the machine where you 
+deploy the Load Balancer.
 Other instances of this module may be easily deployed.
 1. ```sh
    mkdir load-balancer
