@@ -38,6 +38,7 @@ deployed on each **Ceph-mon Module** and then run the **Client** script.
 The installation is composed of various modules.
 
 **MySQL Database**
+
 We deployed this module on the VM `172.16.3.231`. 
 Such IP is hardcoded into **LB_api.py**. 
 Edit it with the IP of the machine where you 
@@ -67,10 +68,11 @@ deploy the MySQL module.
    ```
    
 **Load Balancer**
+
 We deployed this module on the VM `172.16.3.231`. 
 Such IP is hardcoded into **FE_client.py**. 
 Edit it with the IP of the machine where you 
-deploy the Load Balancer.
+deploy the Load Balancer module.
 Other instances of this module may be easily deployed.
 1. ```sh
    mkdir load-balancer
