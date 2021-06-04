@@ -27,6 +27,7 @@ deployed on each **Ceph-mon Module** and then run the **Client** script.
   lxc exec juju-a6d2c6-3-lxd-1 /bin/bash
   python3 api.py
   ```
+  
 **Client**
 * On VM `172.16.3.168`
   ```sh
@@ -112,6 +113,16 @@ Other instances of this module may be easily deployed.
    docker build -t load-balancer .
    docker run -p 8080:8080 -d load-balancer
    ```
-**Ceph-mon & Client**
-* Put `BE_api.py` and `BE_server.py` in the three ceph-mon modules
-* Put `FE_client.py` in the machine where you want to run the client
+   
+**Ceph-mon**
+
+We need to do port-forwarding for the each _juju container_ hosting e _ceph-mon_ module.
+To do it, on each machine we do
+```sh
+iptables -t nat -A PREROUTING -p tcp -i eth0 --dport 8080 -j DNAT --to-destination <juju container IP>:8080
+```
+Then, put `BE_api.py` and `BE_server.py` in each _juju container_
+    
+**Client**
+
+Put `FE_client.py` in the machine where you want to run the client
