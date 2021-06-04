@@ -26,10 +26,6 @@ def get_object_by_name(text):  # noqa: E501
 def get_status():  # noqa: E501
     return redirect(request, getMonitorIP())
 
-@app.route('/test', methods=['POST'])
-def post_test():
-    return redirect(request, getMonitorIP())
-
 
 @app.route('/objects', methods=['GET'])
 def retrieve_list():  # noqa: E501

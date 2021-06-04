@@ -33,20 +33,23 @@ if __name__ == '__main__':
             print(r.text)
 
         elif command == "!delete":
-            r = requests.delete("{}/objects/{}".format(url, splits[1]))
+            filename = splits[1]
+            r = requests.delete("{}/objects/{}".format(url, filename))
             print(r.text)
 
         elif command == "!upload":
-            file = open(splits[1], 'rb')
+            filename = splits[1]
+            file = open(filename, 'rb')
             files = {'file': file}
             r = requests.post("{}/objects".format(url), files=files)
             print(r.text)
             file.close()
 
         elif command == "!download":
-            r = requests.get("{}/objects/{}".format(url, splits[1]))
+            filename = splits[1]
+            r = requests.get("{}/objects/{}".format(url, filename))
             if not r.text == "unable to retrieve the object":
-                file = open(splits[1], "wb")
+                file = open(filename, "wb")
                 file.write(r.content)
                 file.close()
                 print("successfully rerieved file")
