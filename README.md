@@ -1,4 +1,4 @@
-# CC_Ceph_File_Manager
+# [For the Professor]
 
 We will first illustrate how to test the application in the cluster and then 
 explain how to install all the required modules and file needed to replicate 
@@ -27,6 +27,7 @@ deployed on each **Ceph-mon Module** and then run the **Client** script.
   lxc exec juju-a6d2c6-3-lxd-1 /bin/bash
   python3 api.py
   ```
+  
 **Client**
 * On VM `172.16.3.168`
   ```sh
@@ -38,9 +39,11 @@ deployed on each **Ceph-mon Module** and then run the **Client** script.
 The installation is composed of various modules.
 
 **MySQL Database**
+
 We deployed this module on the VM `172.16.3.231`. 
-Such IP is hardcoded into the scripts that interact with this module 
-(e.g. the **Load Balancer module**).
+Such IP is hardcoded into **LB_api.py**. 
+Edit it with the IP of the machine where you 
+deploy the MySQL module.
 1. Deploy a container with MySQL exposing port `3306`
    ```sh
    docker pull mysql/mysql-server
@@ -66,9 +69,11 @@ Such IP is hardcoded into the scripts that interact with this module
    ```
    
 **Load Balancer**
+
 We deployed this module on the VM `172.16.3.231`. 
-Such IP is hardcoded into the scripts that interact with this module 
-(e.g. the **Client module**).
+Such IP is hardcoded into **FE_client.py**. 
+Edit it with the IP of the machine where you 
+deploy the Load Balancer module.
 Other instances of this module may be easily deployed.
 1. ```sh
    mkdir load-balancer
@@ -108,6 +113,16 @@ Other instances of this module may be easily deployed.
    docker build -t load-balancer .
    docker run -p 8080:8080 -d load-balancer
    ```
-**Ceph-mon & Client**
-* Put `BE_api.py` and `BE_server.py` in the three ceph-mon modules
-* Put `FE_client.py` in the machine where you want to run the client
+   
+**Ceph-mon**
+
+We need to do port-forwarding for each _juju container_ hosting e _ceph-mon_ module.
+To do it, on each machine we do
+```sh
+iptables -t nat -A PREROUTING -p tcp -i eth0 --dport 8080 -j DNAT --to-destination <juju container IP>:8080
+```
+Then, put `BE_api.py` and `BE_server.py` in each _juju container_
+    
+**Client**
+
+Put `FE_client.py` in the machine where you want to run the client
