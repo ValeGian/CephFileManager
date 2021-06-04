@@ -116,7 +116,7 @@ Other instances of this module may be easily deployed.
    
 **Ceph-mon**
 
-We need to do port-forwarding for the each _juju container_ hosting e _ceph-mon_ module.
+We need to do port-forwarding for each _juju container_ hosting e _ceph-mon_ module.
 To do it, on each machine we do
 ```sh
 iptables -t nat -A PREROUTING -p tcp -i eth0 --dport 8080 -j DNAT --to-destination <juju container IP>:8080
