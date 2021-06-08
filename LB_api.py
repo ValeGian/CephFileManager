@@ -7,6 +7,8 @@ import MySQLdb
 
 app = Flask(__name__)
 
+myDB = "172.16.3.231"
+
 @app.route('/objects', methods=['POST'])
 def add_object():  # noqa: E501
     return redirect(request, getMonitorIP())
@@ -33,7 +35,7 @@ def retrieve_list():  # noqa: E501
 
 
 def getMonitorIP():
-    mydb = MySQLdb.connect(host="172.16.3.231", user="root", passwd="password", db="ipaddresses")
+    mydb = MySQLdb.connect(host=myDB, user="root", passwd="password", db="ipaddresses")
     mycursor = mydb.cursor()
     sql = "SELECT address FROM ipaddresses.addresses;"
     mycursor.execute(sql)
