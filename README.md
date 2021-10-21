@@ -1,3 +1,5 @@
+Project for the <i>'Cloud Computing'</i> course
+
 # [For the Professor]
 
 We will first illustrate how to test the application in the cluster and then 
