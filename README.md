@@ -10,6 +10,7 @@ Develop a distributed file storage system based on Ceph. The file storage must e
 The application must be composed of two layers:
 - Frontend layer, exposing a REST interface and receiving requests from clients
 - Backend layer, exploiting the librados python library in order to interact with a ceph-mon module already deployed in a juju container
+
 A different instance of the backend layer must be deployed on each of the three ceph-mon modules that are part of our installation.
 
 ## Architectural Design
