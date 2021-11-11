@@ -15,10 +15,15 @@ A different instance of the backend layer must be deployed on each of the three 
 
 ## Architectural Design
 The design of the application follows a Service-Oriented Architecture approach; each module exposes a REST interface. We exploit such approach to have a synchronous communication between Client and Server.
+
 The Frontend/Load Balancer tier receives HTTP requests from clients and forwards them to the REST API exposed by the Backend module, which is then in charge of interacting with the Ceph monitor in order to provide an answer.
+
 We deployed a Load Balancer module that acts as dispatcher of clients’ requests. This module is in charge of balancing the requests between the various instances of Backend in order to increase resource utilization and ensure scalability.
+
 Each time a request is received, the Load Balancer retrieves the list of Backend instances available at that moment from a MySQL database, which stores their IPs. This MySQL works as a Shared Storage tier and thanks to it we could easily update the state of the cluster, adding or removing Backend modules, to handle run time changes in the deployment’ state.
 We could easily deploy more Load Balancer instances that, by interacting with the MySQL database, would always share the same view of the Backend cluster.
+
+<img src='imgs/architecture-design.png'>
 
 ## Frontend Design
 We provide the following methods:
